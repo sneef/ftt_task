@@ -1,0 +1,52 @@
+version: "3.7"
+services:
+    app:
+        build:
+            args:
+                user: git
+                password: Rn742NrLiE2
+                uid: 1401
+            context: ./
+            dockerfile: ftt-app.dockerfile
+        image: ftt-app
+        container_name: ftt-app
+        restart: unless-stopped
+        working_dir: /var/www/html
+        networks:
+            - ftt-app
+        ports:
+            - '9010:9001'
+        volumes:
+            - web_root:/var/www/html
+    nginx:
+        image: nginx:1.17-alpine
+        container_name: ftt-app-nginx
+        restart: unless-stopped
+        ports:
+            - 8020:80
+        volumes:
+            - web_root:/var/www/html
+            - ./.docker-conf/nginx:/etc/nginx/conf.d
+        networks:
+            - ftt-app
+    redis:
+        image: redis:7.2.4-alpine
+        container_name: ftt-app-redis
+        restart: unless-stopped
+        ports:
+            - 6390:6379
+        command: redis-server --save 20 1 --loglevel warning
+        volumes:
+            - cache:/data
+            - ./.docker-conf/redis/redis.conf:/usr/local/etc/redis/redis.conf
+        networks:
+            - ftt-app
+networks:
+    ftt-app:
+        driver: bridge
+
+volumes:
+    web_root:
+    cache:
+        driver: local
+
