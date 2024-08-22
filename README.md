@@ -11,6 +11,7 @@
 <i>git clone https://github.com/sneef/ftt_task.git</i><br>
 2. Копируем файлы ключей (id_rsa, id_rsa.pub) в папку .docker-conf/.ssh/<br>
 3. Запускаем команды в корне проекта:<br>
+<i>cp .env.example .env</i><br>
 <i>docker-compose build app --no-cache</i><br>
 <i>docker-compose up -d</i><br>
 4. После автоматической сборки образа и всего проекта в целом, должны запуститься все контейнеры (их всего 4)<br>
