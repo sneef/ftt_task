@@ -80,7 +80,7 @@ RUN git clone https://github.com/sneef/ftt_task.git ./ && \
 
 RUN composer install
 
-
+COPY ./.env.example ./.env
 ADD ./.env /var/www/html/.env
 
 RUN	chmod -R a+rw /var/www/html/storage && \
