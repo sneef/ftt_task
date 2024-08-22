@@ -29,6 +29,21 @@ services:
             - ./.docker-conf/nginx:/etc/nginx/conf.d
         networks:
             - ftt-app
+    db:
+        image: postgres:16.2-alpine3.19
+        command: ["postgres", "-c", "config_file=/etc/postgresql.conf"]
+        container_name: ftt-app-db
+        restart: unless-stopped
+        environment:
+            - POSTGRES_DB=${DB_DATABASE}
+            - POSTGRES_USER=${DB_USERNAME}
+            - POSTGRES_PASSWORD=${DB_PASSWORD}
+        networks:
+            - ftt-app
+        ports:
+            - '5400:5432'
+        volumes:
+            - ./.docker-conf/postgres/postgresql.conf:/etc/postgresql.conf
     redis:
         image: redis:7.2.4-alpine
         container_name: ftt-app-redis
