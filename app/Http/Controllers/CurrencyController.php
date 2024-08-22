@@ -14,7 +14,7 @@ class CurrencyController extends Controller
     {
         $currentDate = new DateTime('now');
 
-        for($i=0; $i<2; $i++) {
+        for($i=0; $i<160; $i++) {
             \App\Jobs\GetCurrencyCbr::dispatch($currentDate, 'USD', 'RUR');
             $currentDate->modify('-1 day');
         }

@@ -5,7 +5,7 @@ return [
     /**
      * URL для получения курсов валют
      */
-    'cbrUrl' => 'http://www.cbr.ru/scripts/XML_daily.asp',
+    'cbrUrl' => 'https://www.cbr.ru/scripts/XML_dynamic.asp',
 
     /**
      * Список валют в парах ключ->тип валюты
